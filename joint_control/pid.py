@@ -65,7 +65,7 @@ class PIDController(object):
         y = self.y.popleft()
         s = ((self.u - sensor) + (y - sensor)) / (2*self.dt)
         pre = self.u + s*self.dt
-        self.y.append(predicted)
+        self.y.append(pre)
 
         return self.u
 
