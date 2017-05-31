@@ -13,6 +13,7 @@
 import pickle
 from angle_interpolation import AngleInterpolationAgent
 from keyframes import hello
+from keyframes import wipe_forehead
 import numpy
 from os import listdir, path
 
