@@ -57,7 +57,7 @@ class AngleInterpolationAgent(PIDAgent):
                    self.end = timesAtIndex[len(timesAtIndex)-1]
 
 
-        if self.end < timeDiff or self.firstTime == 0:
+        if self.end < timeDiff or self.start == 0:
             self.start = self.curTime
             timeDiff = self.curTime - self.start
 
