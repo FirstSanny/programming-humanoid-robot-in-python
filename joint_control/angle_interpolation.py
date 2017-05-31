@@ -24,8 +24,6 @@ from pid import PIDAgent
 from keyframes import hello
 import numpy as np
 
-eps = 1e-6
-
 class AngleInterpolationAgent(PIDAgent):
     def __init__(self, simspark_ip='localhost',
                  simspark_port=3100,
@@ -59,7 +57,7 @@ class AngleInterpolationAgent(PIDAgent):
                    self.end = timesAtIndex[len(timesAtIndex)-1]
 
 
-        if self.end < timeDiff:
+        if self.end < timeDiff or self.firstTime == 0:
             self.start = self.curTime
             timeDiff = self.curTime - self.start
 
