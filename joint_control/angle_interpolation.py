@@ -80,13 +80,16 @@ class AngleInterpolationAgent(PIDAgent):
                 timeHigh = jointTimes[j]
                 
                 # we found the right interval -> break
-                if ((timeDiff >= timeLow and timeDiff <= timeHigh)): 
+                if ((timeDiff >= timeLow and timeDiff < timeHigh)): 
                     kfNum = j
                     break
                 timeLow = timeHigh
             
             # calculate t-value
-            t = (timeDiff - timeLow) / (timeHigh - timeLow)
+            if((timeHigh - timeLow) == 0.): 
+                t=1.
+            else:
+                t = (timeDiff - timeLow) / (timeHigh - timeLow)
             
             if t > 1.:
                 t = 1.
@@ -103,7 +106,7 @@ class AngleInterpolationAgent(PIDAgent):
             else:
                 p0 = keys[i][kfNum-1][0]
                 p3 = keys[i][kfNum][0]
-                p1 = p0 + keys[i][kfNum-1][2][2]
+                p1 = p0 + keys[i][kfNum-1][1][2]
                 p2 = p3 + keys[i][kfNum][1][2]
                 
             
