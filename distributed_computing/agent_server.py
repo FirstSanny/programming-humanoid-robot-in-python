@@ -31,8 +31,8 @@ class ServerAgent(InverseKinematicsAgent):
     # YOUR CODE HERE
     server = SimpleXMLRPCServer(("localhost", 8000), requestHandler=RequestHandler)
     server.register_introspection_functions()
-    server.register_multicall_functions()()
-    print "Server started at localhost:8000"
+    server.register_multicall_functions()
+    print "Server initialized at localhost:8000"
     
     
     def get_angle(self, joint_name):
