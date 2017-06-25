@@ -32,12 +32,15 @@ class ServerAgent(InverseKinematicsAgent):
     server = SimpleXMLRPCServer(("localhost", 8000), requestHandler=RequestHandler)
     server.register_introspection_functions()
     server.register_multicall_functions()()
+    print "Server started at localhost:8000"
+    
     
     def get_angle(self, joint_name):
         '''get sensor value of given joint'''
         # YOUR CODE HERE
         return self.target_joints[joint_name]
     server.register_function(get_angle, 'get_angle')
+    print "registered 'get_angle'"
     
     def set_angle(self, joint_name, angle):
         '''set target angle of joint for PID controller
@@ -45,12 +48,14 @@ class ServerAgent(InverseKinematicsAgent):
         # YOUR CODE HERE
         self.target_joints[joint_name] = angle
     server.register_function(set_angle, 'set_angle')
+    print "registered 'set_angle'"
 
     def get_posture(self):
         '''return current posture of robot'''
         # we don't inherit from PostureRecognition.. can this even work?
         return self.posture
     server.register_function(get_posture, 'get_posture')
+    print "registered 'get_posture'"
 
     def execute_keyframes(self, keyframes):
         '''excute keyframes, note this function is blocking call,
@@ -60,6 +65,7 @@ class ServerAgent(InverseKinematicsAgent):
         self.keyframes = keyframes
         # how to block here?
     server.register_function(execute_keyframes, 'execute_keyframes')
+    print "registered 'execute_keyframes'"
         
 
     def get_transform(self, name):
@@ -68,6 +74,7 @@ class ServerAgent(InverseKinematicsAgent):
         # YOUR CODE HERE
         return self.transforms[name]
     server.register_function(get_transform, 'get_transform')
+    print "registered 'get_transform'"
 
     def set_transform(self, effector_name, transform):
         '''solve the inverse kinematics and control joints use the results
@@ -75,8 +82,11 @@ class ServerAgent(InverseKinematicsAgent):
         # YOUR CODE HERE
         self.set_transforms(self, effector_name, transform)
     server.register_function(set_transform, 'set_transform')
+    print "registered 'set_transforms'"
+    
     thread = threading.Thread(target=server.serve_forever)
     thread.start()
+    print "server started serving via thread"
 
 if __name__ == '__main__':
     agent = ServerAgent()
