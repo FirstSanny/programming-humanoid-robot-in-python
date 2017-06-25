@@ -35,7 +35,7 @@ class ClientAgent(object):
     def get_angle(self, joint_name):
         '''get sensor value of given joint'''
         # YOUR CODE HERE
-        print self.rpcProxy.get_angle(joint_name)
+        return self.rpcProxy.get_angle(joint_name)
     
     def set_angle(self, joint_name, angle):
         '''set target angle of joint for PID controller
@@ -46,7 +46,7 @@ class ClientAgent(object):
     def get_posture(self):
         '''return current posture of robot'''
         # YOUR CODE HERE
-        print self.rpcProxy.get_posture(self)
+        return self.rpcProxy.get_posture(self)
 
     def execute_keyframes(self, keyframes):
         '''excute keyframes, note this function is blocking call,
@@ -59,7 +59,7 @@ class ClientAgent(object):
         '''get transform with given name
         '''
         # YOUR CODE HERE
-        print self.rpcProxy.get_transform(self, name)
+        return self.rpcProxy.get_transform(self, name)
 
     def set_transform(self, effector_name, transform):
         '''solve the inverse kinematics and control joints use the results
