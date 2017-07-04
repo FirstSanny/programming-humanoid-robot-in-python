@@ -18,10 +18,14 @@ class PostHandler(object):
     def execute_keyframes(self, keyframes):
         '''non-blocking call of ClientAgent.execute_keyframes'''
         # YOUR CODE HERE
+        thread = threading.Thread(target=self.proxy.execute_keyframes, args=[keyframes])
+        thread.start()
 
     def set_transform(self, effector_name, transform):
         '''non-blocking call of ClientAgent.set_transform'''
         # YOUR CODE HERE
+        thread = threading.Thread(target=self.proxy.set_transform, args=[effector_name, transform])
+        thread.start()
 
 
 class ClientAgent(object):
